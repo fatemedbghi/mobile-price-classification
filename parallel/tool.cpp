@@ -97,3 +97,24 @@ vector<vector<float>> normalize_data(vector<vector<float>> train)
     }
     return train;
 }
+
+vector<int> predict_price(vector<vector<long double>> weights, vector<vector<float>> normalized_train)
+{
+    vector<int> predicion;
+    for (int i=0; i< normalized_train.size(); i++)
+    {
+        vector<int>temp;
+        for (int j=0; j<weights.size(); j++)
+        {
+            long double price = 0;
+            for (int k=0; k<weights[0].size()-1; k++)
+                price += weights[j][k]*normalized_train[i][k];
+            price += weights[j][weights[0].size()-1];
+            temp.push_back(price);
+        }
+        // for (int k=0;k<temp.size();k++) cout<<temp[k]<<endl;
+        int p = max_element(temp.begin(),temp.end()) - temp.begin();
+        predicion.push_back(p);
+    }
+    return predicion;
+}
