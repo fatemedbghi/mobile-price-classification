@@ -67,10 +67,33 @@ vector<vector<float>> store_train_data(string file_name)
         string token; 
         while(getline(l, token, ',') && i!=0) 
         {
-            temp.push_back(stod(token));
+            temp.push_back(stof(token));
         }
         if (i!=0) train.push_back(temp);
         i++;
+    }
+    return train;
+}
+
+vector<vector<float>> normalize_data(vector<vector<float>> train)
+{
+    int i;
+    for (i = 0; i < 20; i++)
+    {
+        if (i!=1 && i!=3 && i!=5 && i!=17 && i!=18 && i!=19) 
+        {
+            vector<float> temp;
+            for(int j=0; j<train.size();j++)
+            {
+                temp.push_back(train[j][i]);
+            }
+            float min = *min_element(temp.begin(), temp.end());
+            float max = *max_element(temp.begin(), temp.end());
+            for(int j=0; j<train.size();j++)
+            {
+                train[j][i] = (train[j][i] - min)/(max - min);
+            }
+        }
     }
     return train;
 }

@@ -23,5 +23,5 @@ using namespace std;
 vector<string> files(char* path);
 vector<vector<long double>> store_weight(string file_name);
 vector<vector<float>> store_train_data(string file_name);
-
+vector<vector<float>> normalize_data(vector<vector<float>> train);
 #endif
