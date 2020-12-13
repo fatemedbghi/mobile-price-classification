@@ -8,7 +8,7 @@
 #include <time.h>
 #include "pthread.h"
 
-#define NUMBER_OF_THREADS 2
+#define NUMBER_OF_THREADS 4
 #define FEATURES 20
 
 using namespace std;
