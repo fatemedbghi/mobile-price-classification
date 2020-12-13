@@ -33,7 +33,7 @@ vector<string> files(char* path)
 
 vector<vector<float>> store_weight(string file_name)
 {
-    vector<vector<float>> weights;
+    vector<vector<float>> weight;
 
     fstream fin; 
     fin.open(file_name, ios::in);   
@@ -45,38 +45,43 @@ vector<vector<float>> store_weight(string file_name)
         vector<float> temp;
         stringstream l(line); 
         string token; 
-        while(getline(l, token, ',') && i!=0) 
+        if (!line.empty())
         {
-            temp.push_back(stof(token));
+            while(getline(l, token, ',') && i!=0) 
+                temp.push_back(stof(token));
+
+            if (i!=0) weight.push_back(temp);
+            i++;
         }
-        if (i!=0) weights.push_back(temp);
-        i++;
     }
-    return weights;
+    return weight;
 }
 
 vector<vector<float>> store_train_data(string file_name)
 {
-    vector<vector<float>> train;
-
+    vector<vector<float>> train_data;
     fstream fin; 
     fin.open(file_name, ios::in);   
     string line, word; 
     int i = 0;
+    
     while (fin.good()){
         
         getline(fin, line);
         vector<float> temp;
         stringstream l(line); 
         string token; 
-        while(getline(l, token, ',') && i!=0) 
+        if (!line.empty())
         {
-            temp.push_back(stof(token));
+            while(getline(l, token, ',') && i!=0)
+            {
+                temp.push_back(stof(token));
+            }
+            if (i!=0) train_data.push_back(temp);
+            i++;
         }
-        if (i!=0) train.push_back(temp);
-        i++;
     }
-    return train;
+    return train_data;
 }
 
 vector<vector<float>> normalize_data(vector<vector<float>> train)

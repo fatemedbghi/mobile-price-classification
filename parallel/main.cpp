@@ -74,12 +74,14 @@ vector<vector<float>> store_weight(string file_name)
         vector<float> temp;
         stringstream l(line); 
         string token; 
-        while(getline(l, token, ',') && i!=0) 
+        if (!line.empty())
         {
-            temp.push_back(stof(token));
+            while(getline(l, token, ',') && i!=0) 
+                temp.push_back(stof(token));
+
+            if (i!=0) weight.push_back(temp);
+            i++;
         }
-        if (i!=0) weight.push_back(temp);
-        i++;
     }
     return weight;
 }
@@ -98,12 +100,15 @@ vector<vector<float>> store_train_data(string file_name)
         vector<float> temp;
         stringstream l(line); 
         string token; 
-        while(getline(l, token, ',') && i!=0)
+        if (!line.empty())
         {
-            temp.push_back(stof(token));
+            while(getline(l, token, ',') && i!=0)
+            {
+                temp.push_back(stof(token));
+            }
+            if (i!=0) train_data.push_back(temp);
+            i++;
         }
-        if (i!=0) train_data.push_back(temp);
-        i++;
     }
     return train_data;
 }
