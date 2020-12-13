@@ -4,6 +4,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
+    clock_t tStart = clock();
     char *path = argv[1];
     vector<string> file_names;
     file_names = files(path);
@@ -13,5 +14,6 @@ int main(int argc, char** argv)
     vector<int> prediction = predict_price(weights, normalized_train);
     float accuracy = calc_accuracy(train_data, prediction);
     cout<<"Accuracy: "<<fixed<<setprecision(2)<<accuracy<<"%"<<endl;
+    // printf("Time taken: %fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
     return 0;
 }
